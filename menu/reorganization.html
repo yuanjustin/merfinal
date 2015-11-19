@@ -249,6 +249,7 @@
             data.push(addItem);
 //            addItem.time = [];
 //            addItem.symptom.length = 0;
+/*
             while (index <= text.find('span').length - 1) {
                 if (isDate(text.find('span').eq(index))) {
                     data[data.length] = {"time": [], "symptom": []};
@@ -291,7 +292,30 @@
                 }
                 index++;
             }
+*///原来代码
+            while (index <= text.find('span').length - 1) {
+                if (isDate(text.find('span').eq(index+1))) {
+                    if(data[data.length - 1].symptom.length!=0) {
+                        data[data.length] = {"time": [], "symptom": []};
+                    }
+//                    addtime.value = text.find('span').eq(index - 1).text();
+//                    addtime.unit = text.find('span').eq(index).text();
+                    data[data.length - 1].time.push({
+                        value: text.find('span').eq(index).text(),
+                        unit: text.find('span').eq(index+1).text()
+                    });
+                    index=index+2;
 
+                }
+//                else if(isDate(text.find('span').eq(index + 1)) == false && index <= text.find('span').length - 1){
+//                    data[data.length - 1].symptom.push(text.find('span').eq(index).hasClass('endspan') || text.find('span').eq(index).hasClass('newspan') ? "/n" : text.find('span').eq(index).text());
+//                }
+                else {
+                        data[data.length - 1].symptom.push(text.find('span').eq(index).hasClass('endspan') || text.find('span').eq(index).hasClass('newspan') ? "/n" : text.find('span').eq(index).text());
+                    index++;
+                }
+
+            }
             $.getJSON(
                     "http://localhost:8080/dianzibingli/WebServlet",
                     JSON.stringify({
@@ -333,7 +357,7 @@
     }
     function isDate(obj) {
         if (obj.hasClass('unit')) {
-            if (obj.text() == '年') {
+            if (obj.text() == '年'||obj.text() == '月'||obj.text() == '日'||obj.text() == '时'||obj.text() == '分') {
                 return true;
             } else {
                 return false;
