@@ -1056,7 +1056,7 @@ function selectChange() {
     //改变选择高亮
     obj = getCaretPos();
     if (obj[0].tagName == "SPAN") {
-        if (obj.hasClass('endspan')) {
+        if (obj.hasClass('endspan')) {//todo 逗号整行要更改！！
             $('.selectSpan').removeClass('selectSpan')
             var code = obj.parent();
             while (code.hasClass('secondline')) {
@@ -1620,7 +1620,8 @@ function addspan() {
             inputerChange();
             autoBreakLine();
             $.getJSON(
-                "json/tips.json",
+                "http://localhost:8080/dianzibingli/TipsServlet",
+
                 JSON.stringify({
                     "order": "tips", "term": $(addStr).text()
                 }),
