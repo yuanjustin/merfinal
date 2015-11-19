@@ -1059,13 +1059,13 @@ function selectChange() {
         if (obj.hasClass('endspan')) {//todo 逗号整行要更改！！
             $('.selectSpan').removeClass('selectSpan')
             var code = obj.parent();
-            while (code.hasClass('secondline')) {
-                code.addClass('selectSpan');
-                code = code.prev();
-            }
-            ;
+            //while (code.hasClass('secondline')) {
+            //    code.addClass('selectSpan');
+            //    code = code.prev();
+            //}
+            //;
             code.addClass('selectSpan');
-            code = code.prev();
+            //code = code.prev();
             //}else if(obj.hasClass('newspan')){
         } else {
             $('.selectSpan').removeClass('selectSpan')
